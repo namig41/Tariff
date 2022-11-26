@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tariff.HomePage"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:TabbedPage.ToolbarPlacement="Bottom"
+            SelectedTabColor="Gray"
+            UnselectedTabColor="White"
+            BarBackground="Black"
+            BackgroundColor="#112847">
+
+    <ContentPage Title="Показания">
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="Передать показания" FontSize="25" HorizontalOptions="Center" TextColor="White"/>
+         </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="История">
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="История показаниий" FontSize="25" HorizontalOptions="Center" TextColor="White"/>
+        </StackLayout>
+    </ContentPage>
+
+
+    <ContentPage Title="Аккаунт">
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="Аккаунт" FontSize="25" HorizontalOptions="Center" TextColor="White"/>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
