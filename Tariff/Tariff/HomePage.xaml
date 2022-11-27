@@ -10,9 +10,33 @@
             BackgroundColor="#112847">
 
     <ContentPage Title="Показания">
-        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="Передать показания" FontSize="25" HorizontalOptions="Center" TextColor="White"/>
-         </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="160"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Горячая вода" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Column="1" x:Name="Hot_Water" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
+            <Label Grid.Row="1" Text="Холодная вода" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Row="1" Grid.Column="1" x:Name="Cold_Water" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
+            <Label Grid.Row="2" Text="Газ" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Row="2" Grid.Column="1" x:Name="Gas_numbers" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
+            <Label Grid.Row="3" Text="Электричество" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Row="3" Grid.Column="1" x:Name="Electro_numbers" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Передать показания" BorderWidth="1.5" 
+                CornerRadius="50" 
+                BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>
+
+        </Grid>
+
     </ContentPage>
 
     <ContentPage Title="История">
