@@ -3,46 +3,93 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tariff.HomePage"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             android:TabbedPage.ToolbarPlacement="Bottom"
-            SelectedTabColor="Gray"
-            UnselectedTabColor="White"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            SelectedTabColor="White"
+            UnselectedTabColor="Gray"
             BarBackground="Black"
             BackgroundColor="#112847">
 
     <ContentPage Title="Показания">
-        <Grid>
+        <Grid Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width ="*"/>
+                <ColumnDefinition Width ="*"/>
             </Grid.ColumnDefinitions>
-            <Label Text="Горячая вода" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Entry Grid.Column="1" x:Name="Hot_Water" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
-            <Label Grid.Row="1" Text="Холодная вода" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Entry Grid.Row="1" Grid.Column="1" x:Name="Cold_Water" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
-            <Label Grid.Row="2" Text="Газ" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Entry Grid.Row="2" Grid.Column="1" x:Name="Gas_numbers" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
-            <Label Grid.Row="3" Text="Электричество" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Entry Grid.Row="3" Grid.Column="1" x:Name="Electro_numbers" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray"/>
-            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Передать показания" BorderWidth="1.5" 
+            
+            <Label Text="Горячая вода" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Column="1" x:Name="Hot_Water" Text="1" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
+            
+            <Label Grid.Row="1" Text="Холодная вода" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Row="1" Grid.Column="1" x:Name="Cold_Water" Text="1" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
+            
+            <Label Grid.Row="2" Text="Газ" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Row="2" Grid.Column="1" x:Name="Gas_numbers" Text="1" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
+            
+            <Label Grid.Row="3" Text="Электричество" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Entry Grid.Row="3" Grid.Column="1" x:Name="Electro_numbers" Text="1" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
+            
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
                 CornerRadius="50" 
                 BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>
-
         </Grid>
 
     </ContentPage>
 
     <ContentPage Title="История">
-        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="История показаниий" FontSize="25" HorizontalOptions="Center" TextColor="White"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="20" VerticalOptions="FillAndExpand">
+                <Label Text="История показаниий" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="10"/>
+
+                <Frame BackgroundColor="Black" CornerRadius="20">
+                    <StackLayout>
+                        <Label Text="Горячая вода"/>
+                        <Label Text="Холодная вода"/>
+                        <Label Text="Электричество"/>
+                        <Label Text="Газ"/>
+                        <Label Text="Итог"/>
+                        <Label Text="12.07.2021"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="Black" CornerRadius="20">
+                    <StackLayout>
+                        <Label Text="Горячая вода"/>
+                        <Label Text="Холодная вода"/>
+                        <Label Text="Электричество"/>
+                        <Label Text="Газ"/>
+                        <Label Text="Итог"/>
+                        <Label Text="12.07.2021"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="Black" CornerRadius="20">
+                    <StackLayout>
+                        <Label Text="Горячая вода"/>
+                        <Label Text="Холодная вода"/>
+                        <Label Text="Электричество"/>
+                        <Label Text="Газ"/>
+                        <Label Text="Итог"/>
+                        <Label Text="12.07.2021"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="Black" CornerRadius="20">
+                    <StackLayout>
+                        <Label Text="Горячая вода"/>
+                        <Label Text="Холодная вода"/>
+                        <Label Text="Электричество"/>
+                        <Label Text="Газ"/>
+                        <Label Text="Итог"/>
+                        <Label Text="12.07.2021"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
     </ContentPage>
 
 
