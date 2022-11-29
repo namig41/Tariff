@@ -12,8 +12,7 @@ namespace Tariff
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        readonly String defaultString = "admin";
-        readonly String defaultPassword = "1234";
+
         public LoginPage()
         {
             InitializeComponent();
@@ -21,7 +20,13 @@ namespace Tariff
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            if (LabelUsername.Text == defaultString && LabelPassword.Text == defaultPassword)
+            if (RegisterPage.person == null)
+            {
+                DisplayAlert("Oops...", "Создайте пользователя", "OK");
+                return;
+            }
+
+            if (LabelUsername.Text == RegisterPage.person.name && LabelPassword.Text == RegisterPage.person.password)
             {
                 Navigation.PushModalAsync(new HomePage());
             } 
