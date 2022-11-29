@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tariff.HotWater"
+             BackgroundColor="#112847"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Padding="20" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Frame BackgroundColor="#0a193d" CornerRadius="20" Padding="10">
+
+                <Grid Padding="20" RowSpacing="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Горячая вода" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Entry Grid.Column="1" x:Name="Hot_Water" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
+
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
+                CornerRadius="50"  BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Grid>
+
+                </Frame>
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

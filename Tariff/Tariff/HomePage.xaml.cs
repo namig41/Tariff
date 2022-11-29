@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 
 using Xamarin.Essentials;
 using System.Net.Mail;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat;
 
 namespace Tariff
 {
@@ -22,6 +23,10 @@ namespace Tariff
             LabelName.Text = RegisterPage.person.name;
             LabelEmail.Text = RegisterPage.person.email;
             LabelPhoneNumber.Text = RegisterPage.person.phoneNumber;
+            LabelHWTarif.text = RegisterPage.person.HWTarif;
+            LabelCWTarif.text = RegisterPage.person.CWTarif;
+            LabelGASTarif.text = RegisterPage.person.GASTarif;
+            ElectroTarif.text = RegisterPage.person.ElectroTarif;
         }
 
         double hot;
@@ -29,16 +34,16 @@ namespace Tariff
         double gas;
         double electro;
 
-        async private void Button_Clicked(object sender, EventArgs e)
-        {
-            if (double.TryParse(Hot_Water.Text, out hot) && double.TryParse(Cold_Water.Text, out cold) && double.TryParse(Gas_numbers.Text, out gas) && double.TryParse(Electro_numbers.Text, out electro))
-            {
-                String templateForEmail = $"Показания\nГорячая вода: {Hot_Water.Text}\nХолодная вода: {Cold_Water.Text}\nГаз: {Gas_numbers.Text}\nЭлектричество: {Electro_numbers.Text}";
-                await SendEmail(templateForEmail);
-                appendNewEvent(Hot_Water.Text, Cold_Water.Text, Gas_numbers.Text, Electro_numbers.Text);
-            }
+        //async private void Button_Clicked(object sender, EventArgs e)
+        //{
+        //    if (double.TryParse(Hot_Water.Text, out hot) && double.TryParse(Cold_Water.Text, out cold) && double.TryParse(Gas_numbers.Text, out gas) && double.TryParse(Electro_numbers.Text, out electro))
+        //    {
+        //        String templateForEmail = $"Показания\nГорячая вода: {Hot_Water.Text}\nХолодная вода: {Cold_Water.Text}\nГаз: {Gas_numbers.Text}\nЭлектричество: {Electro_numbers.Text}";
+        //        await SendEmail(templateForEmail);
+        //        appendNewEvent(Hot_Water.Text, Cold_Water.Text, Gas_numbers.Text, Electro_numbers.Text);
+        //    }
 
-        }
+        //}
 
         public async Task SendEmail(String emailBody)
         {
@@ -78,6 +83,10 @@ namespace Tariff
             DisplayAlert("", "Данные успешно изменены", "OK");
         }
 
+
+        
+
+
         void appendNewEvent(String numberOfHotWater, String numberOfColdWater, String numberOfGas, String numberOfElectricity)
         {
             Frame frame = new Frame
@@ -115,6 +124,11 @@ namespace Tariff
 
             frame.Content = newEvent;
             StackHistory.Children.Add(frame);
+        }
+
+        private void HotWaterClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HotWater());
         }
     }
 }

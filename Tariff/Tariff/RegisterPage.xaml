@@ -11,6 +11,36 @@
             <Entry x:Name="LabelPhoneNumber" Placeholder="Номер телефона"  TextColor="White" PlaceholderColor="Gray"/>
             <Entry x:Name="LabelEmail" Placeholder="Почта" TextColor="White" PlaceholderColor="Gray"/>
             <Entry x:Name="LabelPassword" Placeholder="Пароль" IsPassword ="True" TextColor="White" PlaceholderColor="Gray"/>
+            <Picker x:Name="HWTarif_" SelectedIndexChanged="HWTarif" Title="Ваш тариф горячей воды" TitleColor="Gray">
+               
+                <Picker.Items>
+                    <x:String>223,04 руб. за куб. м.</x:String>
+                    <x:String>198,13 руб. за куб. м.</x:String>
+                    <x:String>243,73 руб. за куб. м.</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Picker x:Name="СWTarif_" SelectedIndexChanged="CWTarif" Title="Ваш тариф холодной воды" TitleColor="Gray">
+                <Picker.Items>
+                    <x:String>44,08 руб. за куб. м.</x:String>
+                    <x:String>42,97 руб. за куб. м.</x:String>
+                    <x:String>44,43 руб. за куб. м.</x:String>
+                </Picker.Items>
+            </Picker>
+            <Picker x:Name="GasTarif_" SelectedIndexChanged="GasTarif" Title="Ваш тариф газа" TitleColor="Gray">
+                <Picker.Items>
+                    <x:String>6 374,96 руб. за 1000 куб. м.</x:String>
+                    <x:String>5 875,08 руб. за 1000 куб. м.</x:String>
+                    <x:String>6 764,60 руб. за 1000 куб. м.</x:String>
+                </Picker.Items>
+            </Picker>
+            <Picker x:Name="ElectroTarif_" SelectedIndexChanged="ElectroTarif" Title="Ваш тариф электричества" TitleColor="Gray">
+                <Picker.Items>
+                    <x:String>5,92 руб. за кВт</x:String>
+                    <x:String>6,17 руб. за кВт</x:String>
+                    <x:String>5,93 руб. за кВт</x:String>
+                </Picker.Items>
+            </Picker>
             <Button 
                 VerticalOptions="Center"
                 Text="Создать" 

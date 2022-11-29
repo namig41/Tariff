@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace Tariff
@@ -44,5 +45,23 @@ namespace Tariff
             person.phoneNumber = LabelPhoneNumber.Text;
             Navigation.PopAsync();
         }
+
+        void HWTarif(object sender, EventArgs e)
+        {
+            string d = "Вы выбрали: " + HWTarif_.Items[HWTarif_.SelectedIndex];
+        }
+        void CWTarif(object sender, EventArgs e)
+        {
+            string d = "Вы выбрали: " + СWTarif_.Items[СWTarif_.SelectedIndex];
+        }
+        void GasTarif(object sender, EventArgs e)
+        {
+            string d = "Вы выбрали: " + GasTarif_.Items[GasTarif_.SelectedIndex];
+        }
+        void ElectroTarif(object sender, EventArgs e)
+        {
+            string d = "Вы выбрали: " + ElectroTarif_.Items[ElectroTarif_.SelectedIndex];
+        }
+
     }
 }

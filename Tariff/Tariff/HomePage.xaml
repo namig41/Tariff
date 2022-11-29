@@ -9,13 +9,13 @@
             BarBackground="Black"
             BackgroundColor="#112847">
 
-    <ContentPage Title="Показания">
-        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="Введите показания" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="20"/>
+    <ContentPage Title="Показания" IconImageSource="Pokazaniya.png">
+        <StackLayout Padding="20" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="Введите показания" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="10"/>
 
-            <Frame BackgroundColor="#0a193d" CornerRadius="20" Padding="10">
+            <!--<Frame BackgroundColor="#0a193d" CornerRadius="20" Padding="10">-->
 
-                <Grid Padding="20" RowSpacing="20">
+            <!--<Grid Padding="20" RowSpacing="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -43,13 +43,85 @@
 
                 <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
                 CornerRadius="50"  BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>
+                </Grid>-->
+
+            <!--</Frame>-->
+
+
+            <Frame BackgroundColor="#dcdcdc">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Text="Горячая вода"  FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <ImageButton Grid.Column="1" Source="HotWater.png" Clicked="HotWaterClicked" BackgroundColor="Transparent"/>
                 </Grid>
             </Frame>
+
+            <Frame BackgroundColor="#778899">
+                <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </Frame.GestureRecognizers>-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Text="Холодная вода" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Image Grid.Column="1" Source="ColdWater.png"/>
+                </Grid>
+            </Frame>
+
+
+            <Frame BackgroundColor="#b0c4de">
+                <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </Frame.GestureRecognizers>-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Text="Газ" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Image Grid.Column="1" Source="Gas.png"/>
+                </Grid>
+            </Frame>
+
+
+            <Frame BackgroundColor="#48d1cc">
+                <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </Frame.GestureRecognizers>-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Text="Элекстричество" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Image Grid.Column="1" Source="HotWater.png"/>
+                </Grid>
+            </Frame>
+
+
         </StackLayout>
-                  
+
     </ContentPage>
 
-    <ContentPage Title="История">
+    <ContentPage Title="История" IconImageSource="History.png">
         <ScrollView>
             <StackLayout x:Name ="StackHistory" Padding="20" VerticalOptions="FillAndExpand">
                 <Label Text="История показаниий" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="10"/>
@@ -58,24 +130,37 @@
     </ContentPage>
 
 
-    <ContentPage Title="Аккаунт">
+    <ContentPage Title="Аккаунт" IconImageSource="Acount.png">
         <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
             <Label Text="Профиль" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="20"/>
 
             <Frame BackgroundColor="#0a193d" CornerRadius="20" Padding="10">
                 <Grid Padding="20" RowSpacing="20">
-                    
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="*"/>
                     </Grid.ColumnDefinitions>
+
+
+                    LabelHWTarif.text = RegisterPage.person.HWTarif;
+            LabelCWTarif.text = RegisterPage.person.CWTarif;
+            LabelGASTarif.text = RegisterPage.person.GASTarif;
+            ElectroTarif.text = RegisterPage.person.ElectroTarif;
+
+
+
 
                     <Label Text="Имя" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Entry Grid.Column="1" x:Name="LabelName" TextColor="White" FontSize="20"/>
@@ -86,6 +171,9 @@
                     <Label Grid.Row="2" Text="Номер" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Entry Grid.Row="2" Grid.Column="1" x:Name="LabelPhoneNumber" TextColor="White" FontSize="20"/>
 
+                    <Label Grid.Row="3" Text="Номер" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Entry Grid.Row="2" Grid.Column="1" x:Name="LabelHWTarif" TextColor="White" FontSize="20"/>
+
                     <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Изменить данные" BorderWidth="1.5"  Padding="20" FontSize="15" CornerRadius="50" 
                         BackgroundColor="ForestGreen" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked_1"/>
 
@@ -95,3 +183,4 @@
         </StackLayout>
     </ContentPage>
 </TabbedPage>
+

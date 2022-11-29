@@ -20,7 +20,7 @@
                 Clicked="Button_Clicked"
                 />
 
-            <Label HorizontalOptions="Center" FontSize="15">
+            <Label HorizontalOptions="Center" FontSize="15" Padding="5">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="У вас нет аккаунта? " TextColor="Gray"/>
