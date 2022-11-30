@@ -117,7 +117,7 @@ namespace Tariff
                     new Label
                     {
                         Text = $"Электричество: {numberOfElectricity}",
-                        TextColor = Color.White,
+                        TextColor = Color.White, 
                     },
                 }
             };
