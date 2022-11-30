@@ -10,7 +10,7 @@ namespace Tariff
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new HotWater());
             NavigationPage.SetHasNavigationBar(this, false);
         }
 

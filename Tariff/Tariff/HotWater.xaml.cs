@@ -16,5 +16,11 @@ namespace Tariff
         {
             InitializeComponent();
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            String templateForEmail = $"Показания\nГорячая вода: {Hot_Water.Text}";
+            await HomePage.SendEmail(templateForEmail);
+        }
     }
 }

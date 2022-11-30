@@ -153,15 +153,6 @@
                         <ColumnDefinition Width ="*"/>
                     </Grid.ColumnDefinitions>
 
-
-                    LabelHWTarif.text = RegisterPage.person.HWTarif;
-            LabelCWTarif.text = RegisterPage.person.CWTarif;
-            LabelGASTarif.text = RegisterPage.person.GASTarif;
-            ElectroTarif.text = RegisterPage.person.ElectroTarif;
-
-
-
-
                     <Label Text="Имя" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Entry Grid.Column="1" x:Name="LabelName" TextColor="White" FontSize="20"/>
 
@@ -182,5 +173,6 @@
             </Frame>
         </StackLayout>
     </ContentPage>
+
 </TabbedPage>
 

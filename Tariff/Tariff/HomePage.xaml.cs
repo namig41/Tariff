@@ -23,10 +23,7 @@ namespace Tariff
             LabelName.Text = RegisterPage.person.name;
             LabelEmail.Text = RegisterPage.person.email;
             LabelPhoneNumber.Text = RegisterPage.person.phoneNumber;
-            LabelHWTarif.text = RegisterPage.person.HWTarif;
-            LabelCWTarif.text = RegisterPage.person.CWTarif;
-            LabelGASTarif.text = RegisterPage.person.GASTarif;
-            ElectroTarif.text = RegisterPage.person.ElectroTarif;
+
         }
 
         double hot;
@@ -45,7 +42,7 @@ namespace Tariff
 
         //}
 
-        public async Task SendEmail(String emailBody)
+        public static async Task SendEmail(String emailBody)
         {
             try
             {
@@ -65,12 +62,12 @@ namespace Tariff
 
                 SmtpServer.Send(mail);
 
-                await DisplayAlert("Успешно", "Показания успешно переданы", "OK");
+                // await DisplayAlert("Успешно", "Показания успешно переданы", "OK");
 
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", ex.Message, "OK");
+                // await DisplayAlert("Ошибка", ex.Message, "OK");
             }
         }
 
@@ -83,11 +80,7 @@ namespace Tariff
             DisplayAlert("", "Данные успешно изменены", "OK");
         }
 
-
-        
-
-
-        void appendNewEvent(String numberOfHotWater, String numberOfColdWater, String numberOfGas, String numberOfElectricity)
+        public void appendNewEvent(String textBody)
         {
             Frame frame = new Frame
             {
@@ -101,23 +94,9 @@ namespace Tariff
                 {
                     new Label
                     {
-                        Text = $"Горячая вода: {numberOfHotWater}",
+                        Text = textBody,
                         TextColor = Color.White,
-                    },
-                     new Label
-                    {
-                        Text = $"Холодная вода: {numberOfColdWater}",
-                        TextColor = Color.White,
-                    },
-                    new Label
-                    {
-                        Text = $"Газ: {numberOfGas}",
-                        TextColor = Color.White,
-                    },
-                    new Label
-                    {
-                        Text = $"Электричество: {numberOfElectricity}",
-                        TextColor = Color.White, 
+                        FontSize = 20,
                     },
                 }
             };
@@ -128,7 +107,7 @@ namespace Tariff
 
         private void HotWaterClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new HotWater());
+            Navigation.PushModalAsync(new HotWater());
         }
     }
 }
