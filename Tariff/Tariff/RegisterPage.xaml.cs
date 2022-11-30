@@ -17,9 +17,12 @@ namespace Tariff
 
         readonly static String defaultName = "admin";
         readonly static String defaultPassword = "1234";
-
         readonly static String defaultEmail = "galligalli16@gmail.com";
         readonly static String defaultPhoneNumber = "+7 (985) 444-84-41";
+        readonly static double HotWTarif_int = 223.04;
+        readonly static double ColdWTarif_int = 44.97;
+        readonly static double GasTarif_int = 6.37;
+        readonly static double ElectricityTarif_int = 5.92;
 
 
         static RegisterPage()

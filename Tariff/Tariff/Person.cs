@@ -10,9 +10,9 @@ namespace Tariff
         public string name { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public string HWTarif { get; set; }
-        public string CWTarif { get; set; }
-        public string GasTarif { get; set; }
-        public string ElectroTarif { get; set; }
+        public string HotWTarif_int { get; set; }
+        public string ColdWTarif_int { get; set; }
+        public string GasTarif_int { get; set; }
+        public string ElectricityTarif_int { get; set; }
     }
 }

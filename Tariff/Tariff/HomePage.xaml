@@ -10,8 +10,8 @@
             BackgroundColor="#112847">
 
     <ContentPage Title="Показания" IconImageSource="Pokazaniya.png">
-        <StackLayout Padding="20" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="Введите показания" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="10"/>
+        <StackLayout Padding="10" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="Введите показания" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="1"/>
 
             <!--<Frame BackgroundColor="#0a193d" CornerRadius="20" Padding="10">-->
 
@@ -46,30 +46,31 @@
                 </Grid>-->
 
             <!--</Frame>-->
-
-
+            
             <Frame BackgroundColor="#dcdcdc">
-
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="HotWaterClicked" />
+                </Frame.GestureRecognizers>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="80"/>
                     </Grid.ColumnDefinitions>
                     <Label  Text="Горячая вода"  FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <ImageButton Grid.Column="1" Source="HotWater.png" Clicked="HotWaterClicked" BackgroundColor="Transparent"/>
+                    <Image Grid.Column="1" Source="HotWater.png"/>
                 </Grid>
             </Frame>
 
             <Frame BackgroundColor="#778899">
-                <!--<Frame.GestureRecognizers>
-                    <TapGestureRecognizer />
-                </Frame.GestureRecognizers>-->
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColdWaterClicked"/>
+                </Frame.GestureRecognizers>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width ="*"/>
@@ -82,12 +83,12 @@
 
 
             <Frame BackgroundColor="#b0c4de">
-                <!--<Frame.GestureRecognizers>
-                    <TapGestureRecognizer />
-                </Frame.GestureRecognizers>-->
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GasClicked"/>
+                </Frame.GestureRecognizers>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width ="*"/>
@@ -100,22 +101,24 @@
 
 
             <Frame BackgroundColor="#48d1cc">
-                <!--<Frame.GestureRecognizers>
-                    <TapGestureRecognizer />
-                </Frame.GestureRecognizers>-->
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ElectroClicked"/>
+                </Frame.GestureRecognizers>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="80"/>
                     </Grid.ColumnDefinitions>
                     <Label  Text="Элекстричество" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <Image Grid.Column="1" Source="HotWater.png"/>
+                    <Image Grid.Column="1" Source="electricity.png" BackgroundColor="Transparent"/>
                 </Grid>
             </Frame>
 
+            <Button  Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
+                CornerRadius="50"  BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>
 
         </StackLayout>
 

@@ -30,17 +30,11 @@ namespace Tariff
         double cold;
         double gas;
         double electro;
+        string hotWater;
+        string coldWater;
+        string Gas;
+        string electricity;
 
-        //async private void Button_Clicked(object sender, EventArgs e)
-        //{
-        //    if (double.TryParse(Hot_Water.Text, out hot) && double.TryParse(Cold_Water.Text, out cold) && double.TryParse(Gas_numbers.Text, out gas) && double.TryParse(Electro_numbers.Text, out electro))
-        //    {
-        //        String templateForEmail = $"Показания\nГорячая вода: {Hot_Water.Text}\nХолодная вода: {Cold_Water.Text}\nГаз: {Gas_numbers.Text}\nЭлектричество: {Electro_numbers.Text}";
-        //        await SendEmail(templateForEmail);
-        //        appendNewEvent(Hot_Water.Text, Cold_Water.Text, Gas_numbers.Text, Electro_numbers.Text);
-        //    }
-
-        //}
 
         public static async Task SendEmail(String emailBody)
         {
@@ -105,9 +99,33 @@ namespace Tariff
             StackHistory.Children.Add(frame);
         }
 
-        private void HotWaterClicked(object sender, EventArgs e)
+        private async void HotWaterClicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new HotWater());
+            hotWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
+            
         }
+        private async void ColdWaterClicked(object sender, EventArgs e)
+        {
+            coldWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
+        }
+        private async void GasClicked(object sender, EventArgs e)
+        {
+            Gas = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
+        }
+        private async void ElectroClicked(object sender, EventArgs e)
+        {
+            electricity = await DisplayPromptAsync("Введите показания счетчика", "кВт");
+        }
+        async private void Button_Clicked(object sender, EventArgs e)
+        {
+            if (double.TryParse(hotWater, out hot) && double.TryParse(coldWater, out cold) && double.TryParse(Gas, out gas) && double.TryParse(electricity, out electro))
+            {
+                String templateForEmail = $"Показания\nГорячая вода: {hotWater}\nХолодная вода: {coldWater}\nГаз: {Gas}\nЭлектричество: {electricity}";
+                await SendEmail(templateForEmail);
+                //appendNewEvent(hotWater, coldWater, Gas, electricity);
+            }
+
+        }
+
     }
 }
