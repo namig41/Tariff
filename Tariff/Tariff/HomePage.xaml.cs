@@ -26,16 +26,6 @@ namespace Tariff
 
         }
 
-        double hot;
-        double cold;
-        double gas;
-        double electro;
-        string hotWater;
-        string coldWater;
-        string Gas;
-        string electricity;
-
-
         public static async Task SendEmail(String emailBody)
         {
             try
@@ -62,6 +52,23 @@ namespace Tariff
             catch (Exception ex)
             {
                 // await DisplayAlert("Ошибка", ex.Message, "OK");
+            }
+        }
+
+        public async Task SendSms(string messageText, string recipient)
+        {
+            try
+            {
+                var message = new SmsMessage(messageText, new[] { recipient });
+                await Sms.ComposeAsync(message);
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                // Sms is not supported on this device.
+            }
+            catch (Exception ex)
+            {
+                // Other error has occurred.
             }
         }
 
@@ -92,6 +99,12 @@ namespace Tariff
                         TextColor = Color.White,
                         FontSize = 20,
                     },
+                    new Label
+                    {
+                        Text = DateTime.Now.ToString(),
+                        TextColor = Color.White,
+                        FontSize = 20
+                    }
                 }
             };
 
@@ -101,31 +114,52 @@ namespace Tariff
 
         private async void HotWaterClicked(object sender, EventArgs e)
         {
-            hotWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
-            
+            String hotWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров", "Отправить", "Отмена");
+
+            double result = Double.Parse(hotWater) * RegisterPage.person.hotWater;
+            hotWater = result.ToString();
+
+            String hotWaterStringTemplate = $"Горячая вода: {hotWater} руб. за куб. м.";
+            await SendEmail(hotWaterStringTemplate);
+            await SendSms(hotWaterStringTemplate, RegisterPage.person.phoneNumber);
+            appendNewEvent(hotWaterStringTemplate);
+
         }
         private async void ColdWaterClicked(object sender, EventArgs e)
         {
-            coldWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
+            String coldWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
+
+            double result = Double.Parse(coldWater) * RegisterPage.person.coldWater;
+            coldWater = result.ToString();
+
+            String coldWaterStringTemplate = $"Холодная вода: {coldWater} руб. за куб. м.";
+            await SendEmail(coldWaterStringTemplate);
+            await SendSms(coldWaterStringTemplate, RegisterPage.person.phoneNumber);
+            appendNewEvent(coldWaterStringTemplate);
         }
         private async void GasClicked(object sender, EventArgs e)
         {
-            Gas = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
+            String gas = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров");
+
+            double result = Double.Parse(gas) * RegisterPage.person.gas;
+            gas = result.ToString();
+
+            String gasStringTemplate = $"Газ: {gas} руб. за 1000 куб. м.";
+            await SendEmail(gasStringTemplate);
+            await SendSms(gasStringTemplate, RegisterPage.person.phoneNumber);
+            appendNewEvent(gasStringTemplate);
         }
         private async void ElectroClicked(object sender, EventArgs e)
         {
-            electricity = await DisplayPromptAsync("Введите показания счетчика", "кВт");
-        }
-        async private void Button_Clicked(object sender, EventArgs e)
-        {
-            if (double.TryParse(hotWater, out hot) && double.TryParse(coldWater, out cold) && double.TryParse(Gas, out gas) && double.TryParse(electricity, out electro))
-            {
-                String templateForEmail = $"Показания\nГорячая вода: {hotWater}\nХолодная вода: {coldWater}\nГаз: {Gas}\nЭлектричество: {electricity}";
-                await SendEmail(templateForEmail);
-                //appendNewEvent(hotWater, coldWater, Gas, electricity);
-            }
+            String electricity = await DisplayPromptAsync("Введите показания счетчика", "кВт");
 
-        }
+            double result = Double.Parse(electricity) * RegisterPage.person.electricity;
+            electricity = result.ToString();
 
+            String electricityStringTemplate = $"Электричество: {electricity} руб. за кВт";
+            await SendEmail(electricityStringTemplate);
+            await SendSms(electricityStringTemplate, RegisterPage.person.phoneNumber);
+            appendNewEvent(electricityStringTemplate);
+        }
     }
 }

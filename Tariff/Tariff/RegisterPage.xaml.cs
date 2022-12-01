@@ -17,12 +17,12 @@ namespace Tariff
 
         readonly static String defaultName = "admin";
         readonly static String defaultPassword = "1234";
-        readonly static String defaultEmail = "galligalli16@gmail.com";
-        readonly static String defaultPhoneNumber = "+7 (985) 444-84-41";
-        readonly static double HotWTarif_int = 223.04;
-        readonly static double ColdWTarif_int = 44.97;
-        readonly static double GasTarif_int = 6.37;
-        readonly static double ElectricityTarif_int = 5.92;
+        readonly static String defaultEmail = "guseinovnamig41@gmail.com";
+        readonly static String defaultPhoneNumber = "+7 (985) 355-79-73";
+        readonly static double defaultHotWTarif = 223.04;
+        readonly static double defaultColdWTarif = 44.97;
+        readonly static double defaultGasTarif = 6.37;
+        readonly static double defaultElectricityTarif = 5.92;
 
 
         static RegisterPage()
@@ -33,6 +33,10 @@ namespace Tariff
             person.password = defaultPassword;
             person.email = defaultEmail;
             person.phoneNumber = defaultPhoneNumber;
+            person.hotWater = defaultHotWTarif;
+            person.coldWater = defaultColdWTarif;
+            person.gas = defaultGasTarif;
+            person.electricity = defaultElectricityTarif;
         }
 
         public RegisterPage()
@@ -51,19 +55,23 @@ namespace Tariff
 
         void HWTarif(object sender, EventArgs e)
         {
-            string d = "Вы выбрали: " + HWTarif_.Items[HWTarif_.SelectedIndex];
+            string tarifItem = HWTarif_.Items[HWTarif_.SelectedIndex];
+            person.hotWater = Double.Parse(tarifItem);
         }
         void CWTarif(object sender, EventArgs e)
         {
-            string d = "Вы выбрали: " + СWTarif_.Items[СWTarif_.SelectedIndex];
+            string tarifItem = СWTarif_.Items[СWTarif_.SelectedIndex];
+            person.coldWater = Double.Parse(tarifItem);
         }
         void GasTarif(object sender, EventArgs e)
         {
-            string d = "Вы выбрали: " + GasTarif_.Items[GasTarif_.SelectedIndex];
+            string tarifItem = GasTarif_.Items[GasTarif_.SelectedIndex];
+            person.gas = Double.Parse(tarifItem);
         }
         void ElectroTarif(object sender, EventArgs e)
         {
-            string d = "Вы выбрали: " + ElectroTarif_.Items[ElectroTarif_.SelectedIndex];
+            string tarifItem = ElectroTarif_.Items[ElectroTarif_.SelectedIndex];
+            person.electricity = Double.Parse(tarifItem);
         }
 
     }

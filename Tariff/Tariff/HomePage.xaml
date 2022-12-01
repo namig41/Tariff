@@ -47,7 +47,7 @@
 
             <!--</Frame>-->
             
-            <Frame BackgroundColor="#dcdcdc">
+            <Frame BackgroundColor="#dcdcdc" CornerRadius="10">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="HotWaterClicked" />
                 </Frame.GestureRecognizers>
@@ -64,7 +64,7 @@
                 </Grid>
             </Frame>
 
-            <Frame BackgroundColor="#778899">
+            <Frame BackgroundColor="#778899" CornerRadius="10">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ColdWaterClicked"/>
                 </Frame.GestureRecognizers>
@@ -82,7 +82,7 @@
             </Frame>
 
 
-            <Frame BackgroundColor="#b0c4de">
+            <Frame BackgroundColor="#b0c4de" CornerRadius="10">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="GasClicked"/>
                 </Frame.GestureRecognizers>
@@ -100,7 +100,7 @@
             </Frame>
 
 
-            <Frame BackgroundColor="#48d1cc">
+            <Frame BackgroundColor="#48d1cc" CornerRadius="10">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ElectroClicked"/>
                 </Frame.GestureRecognizers>
@@ -117,8 +117,8 @@
                 </Grid>
             </Frame>
 
-            <Button  Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
-                CornerRadius="50"  BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>
+            <!--<Button  Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
+                CornerRadius="50"  BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>-->
 
         </StackLayout>
 
@@ -164,9 +164,6 @@
 
                     <Label Grid.Row="2" Text="Номер" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Entry Grid.Row="2" Grid.Column="1" x:Name="LabelPhoneNumber" TextColor="White" FontSize="20"/>
-
-                    <Label Grid.Row="3" Text="Номер" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Entry Grid.Row="2" Grid.Column="1" x:Name="LabelHWTarif" TextColor="White" FontSize="20"/>
 
                     <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Изменить данные" BorderWidth="1.5"  Padding="20" FontSize="15" CornerRadius="50" 
                         BackgroundColor="ForestGreen" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked_1"/>
