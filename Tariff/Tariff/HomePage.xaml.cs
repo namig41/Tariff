@@ -24,9 +24,24 @@ namespace Tariff
             LabelEmail.Text = RegisterPage.person.email;
             LabelPhoneNumber.Text = RegisterPage.person.phoneNumber;
 
+            readHistory();
+
         }
 
-        public static async Task SendEmail(String emailBody)
+        public void readHistory()
+        {
+            double hotWaterLast = Preferences.Get("HW", 0.0);
+            double coldWaterLast = Preferences.Get("CW", 0.0);
+            double gasLast = Preferences.Get("GAS", 0.0);
+            double electricityLast = Preferences.Get("Electro", 0.0);
+
+            appendNewEvent($"Горячая вода: {hotWaterLast} куб. м.");
+            appendNewEvent($"Холодная вода: {coldWaterLast} куб. м.");
+            appendNewEvent($"Газ: {gasLast} куб. м.");
+            appendNewEvent($"Электричество: {electricityLast} Квт");
+        }
+
+        public async Task SendEmail(String emailBody)
         {
             try
             {
@@ -116,16 +131,34 @@ namespace Tariff
         {
             String hotWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров", "Отправить", "Отмена");
             double hotWaterDouble;
+            
             if (Double.TryParse(hotWater, out hotWaterDouble))
             {
-                double result = hotWaterDouble * RegisterPage.person.hotWater;
-                hotWater = result.ToString();
+                double history = Preferences.Get("HW", 0.0);
+                if (hotWaterDouble > history)
+                {
+                    double result = (hotWaterDouble - history) * RegisterPage.person.hotWater;
+                    hotWater = result.ToString();
+                    Preferences.Set("HW", hotWaterDouble);
+                    String hotWaterStringTemplate = $"Горячая вода: {hotWater} руб.";
+                    // await SendEmail(hotWaterStringTemplate);
+                    await SendSms(hotWaterStringTemplate, RegisterPage.person.phoneNumber);
+                    //appendNewEvent(hotWaterStringTemplate);
+                }
+                else
+                {
+                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                }
+                
             }
-
-            String hotWaterStringTemplate = $"Горячая вода: {hotWater} руб. за куб. м.";
-            await SendEmail(hotWaterStringTemplate);
-            await SendSms(hotWaterStringTemplate, RegisterPage.person.phoneNumber);
-            appendNewEvent(hotWaterStringTemplate);
+            else if (hotWater == null)
+            {
+                
+            }
+            else
+            {
+                await DisplayAlert("", "Показатели должны бить числами", "OK");
+            }
 
         }
         private async void ColdWaterClicked(object sender, EventArgs e)
@@ -134,12 +167,29 @@ namespace Tariff
             double coldWaterDouble;
             if (Double.TryParse(coldWater, out coldWaterDouble))
             {
-                double result = coldWaterDouble * RegisterPage.person.coldWater;
-                coldWater = result.ToString();
-                String coldWaterStringTemplate = $"Холодная вода: {coldWater} руб. за куб. м.";
-                await SendEmail(coldWaterStringTemplate);
-                await SendSms(coldWaterStringTemplate, RegisterPage.person.phoneNumber);
-                appendNewEvent(coldWaterStringTemplate);
+                double history = Preferences.Get("CW", 0.0);
+                if (coldWaterDouble > history)
+                {
+                    double result = (coldWaterDouble - history) * RegisterPage.person.coldWater;
+                    coldWater = result.ToString();
+                    Preferences.Set("CW", coldWaterDouble);
+                    String coldWaterStringTemplate = $"Холодная вода: {coldWater} руб.";
+                    // await SendEmail(hotWaterStringTemplate);
+                    await SendSms(coldWaterStringTemplate, RegisterPage.person.phoneNumber);
+                    //appendNewEvent(coldWaterStringTemplate);
+                }
+                else
+                {
+                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                }
+            }
+            else if (coldWater == null)
+            {
+
+            }
+            else
+            {
+                await DisplayAlert("", "Показатели должны бить числами", "OK");
             }
         }
         private async void GasClicked(object sender, EventArgs e)
@@ -148,12 +198,31 @@ namespace Tariff
             double gasDouble;
             if (Double.TryParse(gas, out gasDouble))
             {
-                double result = gasDouble * RegisterPage.person.gas;
-                gas = result.ToString();
-                String gasStringTemplate = $"Газ: {gas} руб. за 1000 куб. м.";
-                await SendEmail(gasStringTemplate);
-                await SendSms(gasStringTemplate, RegisterPage.person.phoneNumber);
-                appendNewEvent(gasStringTemplate);
+                double history = Preferences.Get("GAS", 0.0);
+                if (gasDouble > history)
+                {
+                    double result = (gasDouble - history) * RegisterPage.person.gas;
+                    gas = result.ToString();
+                    Preferences.Set("GAS", gasDouble);
+                    String GASStringTemplate = $"Газ: {gas} руб.";
+                    // await SendEmail(hotWaterStringTemplate);
+                    await SendSms(GASStringTemplate, RegisterPage.person.phoneNumber);
+                    //appendNewEvent(GASStringTemplate);
+
+                }
+                else
+                {
+                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                }
+
+            }
+            else if (gas == null)
+            {
+
+            }
+            else
+            {
+                await DisplayAlert("", "Показатели должны бить числами", "OK");
             }
         }
         private async void ElectroClicked(object sender, EventArgs e)
@@ -163,13 +232,30 @@ namespace Tariff
 
             if (Double.TryParse(electricity, out electricityDouble))
             {
-                double result = electricityDouble * RegisterPage.person.gas;
-                electricity = result.ToString();
-                String electricityStringTemplate = $"Электричество: {electricity} руб. за кВт";
-                await SendEmail(electricityStringTemplate);
-                await SendSms(electricityStringTemplate, RegisterPage.person.phoneNumber);
-                appendNewEvent(electricityStringTemplate);
-            }   
+                double history = Preferences.Get("Electro", 0.0);
+                if (electricityDouble > history)
+                {
+                    double result = (electricityDouble - history) * RegisterPage.person.electricity;
+                    electricity = result.ToString();
+                    Preferences.Set("Electro", electricityDouble);
+                    String ElectroStringTemplate = $"Электричество: {electricity} руб.";
+                    // await SendEmail(hotWaterStringTemplate);
+                    await SendSms(ElectroStringTemplate, RegisterPage.person.phoneNumber);
+                    //appendNewEvent(ElectroStringTemplate);
+                }
+                else
+                {
+                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                }
+            }
+            else if (electricity == null)
+            {
+
+            }
+            else
+            {
+                await DisplayAlert("", "Показатели должны бить числами", "OK");
+            }
         }
     }
 }

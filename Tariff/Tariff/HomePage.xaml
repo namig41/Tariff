@@ -10,43 +10,9 @@
             BackgroundColor="#112847">
 
     <ContentPage Title="Показания" IconImageSource="Pokazaniya.png">
-        <StackLayout Padding="10" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="Введите показания" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="1"/>
+        <StackLayout Padding="15" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="Введите показания" FontSize="40" HorizontalOptions="Center" TextColor="White" Margin="1"/>
 
-            <!--<Frame BackgroundColor="#0a193d" CornerRadius="20" Padding="10">-->
-
-            <!--<Grid Padding="20" RowSpacing="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width ="*"/>
-                    <ColumnDefinition Width ="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Text="Горячая вода" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Entry Grid.Column="1" x:Name="Hot_Water" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
-
-                <Label Grid.Row="1" Text="Холодная вода" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Entry Grid.Row="1" Grid.Column="1" x:Name="Cold_Water" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
-
-                <Label Grid.Row="2" Text="Газ" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Entry Grid.Row="2" Grid.Column="1" x:Name="Gas_numbers" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
-
-                <Label Grid.Row="3" Text="Электричество" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Entry Grid.Row="3" Grid.Column="1" x:Name="Electro_numbers" Placeholder="Введите объем" TextColor="White" PlaceholderColor="Gray" FontSize="20"/>
-
-                <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
-                CornerRadius="50"  BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>
-                </Grid>-->
-
-            <!--</Frame>-->
-            
             <Frame BackgroundColor="#dcdcdc" CornerRadius="10">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="HotWaterClicked" />
@@ -59,7 +25,7 @@
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="80"/>
                     </Grid.ColumnDefinitions>
-                    <Label  Text="Горячая вода"  FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label  Text="Горячая вода" TextColor="Black" FontSize="37" VerticalOptions="Center" HorizontalOptions="Center"/>
                     <Image Grid.Column="1" Source="HotWater.png"/>
                 </Grid>
             </Frame>
@@ -76,11 +42,10 @@
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="80"/>
                     </Grid.ColumnDefinitions>
-                    <Label  Text="Холодная вода" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label  Text="Холодная вода" TextColor="Black" FontSize="37" VerticalOptions="Center" HorizontalOptions="Center"/>
                     <Image Grid.Column="1" Source="ColdWater.png"/>
                 </Grid>
             </Frame>
-
 
             <Frame BackgroundColor="#b0c4de" CornerRadius="10">
                 <Frame.GestureRecognizers>
@@ -94,11 +59,10 @@
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="80"/>
                     </Grid.ColumnDefinitions>
-                    <Label  Text="Газ" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label  Text="Газ" FontSize="37" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
                     <Image Grid.Column="1" Source="Gas.png"/>
                 </Grid>
             </Frame>
-
 
             <Frame BackgroundColor="#48d1cc" CornerRadius="10">
                 <Frame.GestureRecognizers>
@@ -112,32 +76,28 @@
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="80"/>
                     </Grid.ColumnDefinitions>
-                    <Label  Text="Элекстричество" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label  Text="Элекстричество" TextColor="Black" FontSize="37"  VerticalOptions="Center" HorizontalOptions="Center"/>
                     <Image Grid.Column="1" Source="electricity.png" BackgroundColor="Transparent"/>
                 </Grid>
             </Frame>
-
-            <!--<Button  Text="Передать показания" BorderWidth="1.5"  Padding="20" FontSize="15"
-                CornerRadius="50"  BorderColor="ForestGreen" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked"/>-->
-
         </StackLayout>
-
     </ContentPage>
 
+    
     <ContentPage Title="История" IconImageSource="History.png">
         <ScrollView>
             <StackLayout x:Name ="StackHistory" Padding="20" VerticalOptions="FillAndExpand">
-                <Label Text="История показаниий" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="10"/>
+                <Label Text="Последние показания" FontSize="38" HorizontalOptions="Center" TextColor="White" Margin="10"/>
             </StackLayout>
         </ScrollView>
     </ContentPage>
 
 
     <ContentPage Title="Аккаунт" IconImageSource="Acount.png">
-        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="Профиль" FontSize="25" HorizontalOptions="Center" TextColor="White" Margin="20"/>
+        <StackLayout Padding="14" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="Профиль" FontSize="40" HorizontalOptions="Center" TextColor="White" Margin="30"/>
 
-            <Frame BackgroundColor="#0a193d" CornerRadius="20" Padding="10">
+            <Frame BackgroundColor="#0a193d" CornerRadius="40" Padding="1">
                 <Grid Padding="20" RowSpacing="20">
 
                     <Grid.RowDefinitions>
@@ -152,7 +112,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="70"/>
                         <ColumnDefinition Width ="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -165,7 +125,7 @@
                     <Label Grid.Row="2" Text="Номер" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Entry Grid.Row="2" Grid.Column="1" x:Name="LabelPhoneNumber" TextColor="White" FontSize="20"/>
 
-                    <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Изменить данные" BorderWidth="1.5"  Padding="20" FontSize="15" CornerRadius="50" 
+                    <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Изменить данные" BorderWidth="1.5"  Padding="15" FontSize="15" CornerRadius="50" 
                         BackgroundColor="ForestGreen" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked_1"/>
 
                 </Grid>
