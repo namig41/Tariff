@@ -87,7 +87,6 @@
     <ContentPage Title="История" IconImageSource="History.png">
         <ScrollView>
             <StackLayout x:Name ="StackHistory" Padding="20" VerticalOptions="FillAndExpand">
-                <Label Text="Последние показания" FontSize="38" HorizontalOptions="Center" TextColor="White" Margin="10"/>
             </StackLayout>
         </ScrollView>
     </ContentPage>
