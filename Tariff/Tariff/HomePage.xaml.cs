@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using System.Net.Mail;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Tariff
 {
@@ -34,7 +35,8 @@ namespace Tariff
             double coldWaterLast = Preferences.Get("CW", 0.0);
             double gasLast = Preferences.Get("GAS", 0.0);
             double electricityLast = Preferences.Get("Electro", 0.0);
-
+            string Text = "По данным на " + DateTime.Today.ToString().Substring(0, 11) + " последние показания:";
+            appendDate(Text);
             appendNewEvent($"Горячая вода: {hotWaterLast} куб. м.");
             appendNewEvent($"Холодная вода: {coldWaterLast} куб. м.");
             appendNewEvent($"Газ: {gasLast} куб. м.");
@@ -96,6 +98,33 @@ namespace Tariff
             DisplayAlert("", "Данные успешно изменены", "OK");
         }
 
+
+        public void appendDate(String textBody)
+        {
+            Frame frame = new Frame
+            {
+                BackgroundColor = Color.Transparent,
+                CornerRadius = 20
+            };
+
+            StackLayout newEvent = new StackLayout
+            {
+                Children =
+                {
+                    new Label
+                    {
+                        Text = textBody,
+                        TextColor = Color.White,
+                        FontSize = 25,
+                    }
+                }
+            };
+
+            frame.Content = newEvent;
+            StackHistory.Children.Add(frame);
+        }
+
+
         public void appendNewEvent(String textBody)
         {
             Frame frame = new Frame
@@ -113,12 +142,6 @@ namespace Tariff
                         Text = textBody,
                         TextColor = Color.White,
                         FontSize = 20,
-                    },
-                    new Label
-                    {
-                        Text = DateTime.Now.ToString(),
-                        TextColor = Color.White,
-                        FontSize = 20
                     }
                 }
             };

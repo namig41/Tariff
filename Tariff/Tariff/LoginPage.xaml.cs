@@ -28,13 +28,13 @@ namespace Tariff
             RegisterPage.person.email = Preferences.Get("email", RegisterPage.defaultEmail);
             RegisterPage.person.phoneNumber = Preferences.Get("phoneNumber", RegisterPage.defaultPhoneNumber);
             string HW = Preferences.Get("HWTarif", "223.04");
-            RegisterPage.person.hotWater = double.Parse(HW);
+            //RegisterPage.person.hotWater = double.Parse(HW);
             string CW = Preferences.Get("CWTarif", "44.97");
-            RegisterPage.person.coldWater = double.Parse(CW);
+            //RegisterPage.person.coldWater = double.Parse(CW);
             string GAS = Preferences.Get("GasTarif", "6.37");
-            RegisterPage.person.gas = double.Parse(GAS);
+            //RegisterPage.person.gas = double.Parse(GAS);
             string ElectroTarif = Preferences.Get("ElectroTarif", "5.92");
-            RegisterPage.person.electricity = double.Parse(ElectroTarif);
+            //RegisterPage.person.electricity = double.Parse(ElectroTarif);
         }
 
         private void Button_Clicked(object sender, EventArgs e)

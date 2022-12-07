@@ -65,7 +65,7 @@ namespace Tariff
         void HWTarif(object sender, EventArgs e)
         {
             string tarifItem = HWTarif_.Items[HWTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, tarifItem.Length - 16);
+            tarifItem = tarifItem.Substring(0, 5);
             person.hotWater = Double.Parse(tarifItem);
             Preferences.Set("HWTarif", tarifItem);
 
@@ -73,14 +73,14 @@ namespace Tariff
         void CWTarif(object sender, EventArgs e)
         {
             string tarifItem = СWTarif_.Items[СWTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, tarifItem.Length - 16);
+            tarifItem = tarifItem.Substring(0, 5);
             person.coldWater = Double.Parse(tarifItem);
             Preferences.Set("CWTarif", tarifItem);
         }
         void GasTarif(object sender, EventArgs e)
         {
             string tarifItem = GasTarif_.Items[GasTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, tarifItem.Length - 21);
+            tarifItem = tarifItem.Substring(0, 7);
             person.gas = Double.Parse(tarifItem);
             Preferences.Set("GasTarif", tarifItem);
 
@@ -88,7 +88,7 @@ namespace Tariff
         void ElectroTarif(object sender, EventArgs e)
         {
             string tarifItem = ElectroTarif_.Items[ElectroTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, tarifItem.Length - 12);
+            tarifItem = tarifItem.Substring(0, 4);
             person.electricity = Double.Parse(tarifItem);
             Preferences.Set("ElectroTarif", tarifItem);
         }
