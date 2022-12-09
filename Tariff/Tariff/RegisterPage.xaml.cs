@@ -143,10 +143,10 @@ namespace Tariff
             }
             else
             {
-                //person.name = LabelUsername.Text;
-                //person.password = LabelPassword.Text;
-                //person.email = LabelEmail.Text;
-                //person.phoneNumber = LabelPhoneNumber.Text;
+                person.name = LabelUsername.Text;
+                person.password = LabelPassword.Text;
+                person.email = LabelEmail.Text;
+                person.phoneNumber = LabelPhoneNumber.Text;
                 saveSettingsInFile();
                 Navigation.PopAsync();
             }            
