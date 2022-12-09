@@ -24,7 +24,10 @@ namespace Tariff
             LabelName.Text = RegisterPage.person.name;
             LabelEmail.Text = RegisterPage.person.email;
             LabelPhoneNumber.Text = RegisterPage.person.phoneNumber;
-
+            HWTarif_.SelectedIndex = Preferences.Get("HW_picker", 0);
+            СWTarif_.SelectedIndex = Preferences.Get("CW_picker", 0);
+            GasTarif_.SelectedIndex = Preferences.Get("Gas_picker", 0);
+            ElectroTarif_.SelectedIndex = Preferences.Get("Electro_picker", 0);
             readHistory();
 
         }
@@ -51,7 +54,7 @@ namespace Tariff
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
                 mail.From = new MailAddress("guseinovnamig41@gmail.com");
-                mail.To.Add(RegisterPage.person.email);
+                mail.To.Add(Preferences.Get("email", ""));
                 mail.Subject = "Показания";
                 mail.Body = emailBody;
 
@@ -91,11 +94,56 @@ namespace Tariff
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            RegisterPage.person.name = LabelName.Text;
-            RegisterPage.person.email = LabelEmail.Text;
-            RegisterPage.person.phoneNumber = LabelPhoneNumber.Text;
+            if (!RegisterPage.EmailValid(LabelEmail.Text))
+            {
+                DisplayAlert("", "Введите валидный Email", "OK");
+            } else if (!RegisterPage.PhoneValid(LabelPhoneNumber.Text))
+            {
+                DisplayAlert("", "Введите настоящий номер телефона", "OK");
+            } else if (!RegisterPage.NameValid(LabelName.Text))
+            {
+                DisplayAlert("", "Длина логина должна быть больше 5 символов", "OK");
+            }
+            else
+            {
+                Preferences.Set("name", LabelName.Text);
+                Preferences.Set("email", LabelEmail.Text);
+                Preferences.Set("phoneNumber", LabelPhoneNumber.Text);
 
-            DisplayAlert("", "Данные успешно изменены", "OK");
+                string hwZamena = HWTarif_.Items[HWTarif_.SelectedIndex].Substring(0, 5);
+                string cwZamena = СWTarif_.Items[СWTarif_.SelectedIndex].Substring(0, 5);
+                string gasZamena = GasTarif_.Items[GasTarif_.SelectedIndex].Substring(0, 7);
+                string electroZamena = ElectroTarif_.Items[ElectroTarif_.SelectedIndex].Substring(0, 4);
+
+
+                try
+                {
+                    Preferences.Set("HWTarif", double.Parse(hwZamena));
+                    Preferences.Set("CWTarif", double.Parse(cwZamena));
+                    Preferences.Set("GasTarif", double.Parse(gasZamena));
+                    Preferences.Set("ElectroTarif", double.Parse(electroZamena));
+                }
+                catch
+                {
+                    hwZamena = hwZamena.Replace('.', ',');
+                    cwZamena = cwZamena.Replace('.', ',');
+                    gasZamena = gasZamena.Replace('.', ',');
+                    electroZamena = electroZamena.Replace('.', ',');
+                    Preferences.Set("HWTarif", double.Parse(hwZamena));
+                    Preferences.Set("CWTarif", double.Parse(cwZamena));
+                    Preferences.Set("GasTarif", double.Parse(gasZamena));
+                    Preferences.Set("ElectroTarif", double.Parse(electroZamena));
+
+                }
+                Preferences.Set("HW_picker", HWTarif_.SelectedIndex);
+                Preferences.Set("CW_picker", СWTarif_.SelectedIndex);
+                Preferences.Set("Gas_picker", GasTarif_.SelectedIndex);
+                Preferences.Set("Electro_picker", ElectroTarif_.SelectedIndex);
+                DisplayAlert("", "Данные успешно изменены", "OK");
+            }
+
+
+            
         }
 
 
@@ -160,11 +208,11 @@ namespace Tariff
                 double history = Preferences.Get("HW", 0.0);
                 if (hotWaterDouble > history)
                 {
-                    double result = (hotWaterDouble - history) * RegisterPage.person.hotWater;
+                    double result = (hotWaterDouble - history) * Preferences.Get("HWTarif", 0.0);
                     hotWater = result.ToString();
                     Preferences.Set("HW", hotWaterDouble);
                     String hotWaterStringTemplate = $"Горячая вода: {hotWater} руб.";
-                    // await SendEmail(hotWaterStringTemplate);
+                    await SendEmail(hotWaterStringTemplate);
                     await SendSms(hotWaterStringTemplate, RegisterPage.person.phoneNumber);
                     //appendNewEvent(hotWaterStringTemplate);
                 }
@@ -193,11 +241,11 @@ namespace Tariff
                 double history = Preferences.Get("CW", 0.0);
                 if (coldWaterDouble > history)
                 {
-                    double result = (coldWaterDouble - history) * RegisterPage.person.coldWater;
+                    double result = (coldWaterDouble - history) * Preferences.Get("CWTarif", 0.0);
                     coldWater = result.ToString();
                     Preferences.Set("CW", coldWaterDouble);
                     String coldWaterStringTemplate = $"Холодная вода: {coldWater} руб.";
-                    // await SendEmail(hotWaterStringTemplate);
+                    await SendEmail(coldWaterStringTemplate);
                     await SendSms(coldWaterStringTemplate, RegisterPage.person.phoneNumber);
                     //appendNewEvent(coldWaterStringTemplate);
                 }
@@ -224,11 +272,11 @@ namespace Tariff
                 double history = Preferences.Get("GAS", 0.0);
                 if (gasDouble > history)
                 {
-                    double result = (gasDouble - history) * RegisterPage.person.gas;
+                    double result = (gasDouble - history) * Preferences.Get("GasTarif", 0.0);
                     gas = result.ToString();
                     Preferences.Set("GAS", gasDouble);
                     String GASStringTemplate = $"Газ: {gas} руб.";
-                    // await SendEmail(hotWaterStringTemplate);
+                    await SendEmail(GASStringTemplate);
                     await SendSms(GASStringTemplate, RegisterPage.person.phoneNumber);
                     //appendNewEvent(GASStringTemplate);
 
@@ -256,13 +304,14 @@ namespace Tariff
             if (Double.TryParse(electricity, out electricityDouble))
             {
                 double history = Preferences.Get("Electro", 0.0);
+                
                 if (electricityDouble > history)
                 {
-                    double result = (electricityDouble - history) * RegisterPage.person.electricity;
+                    double result = (electricityDouble - history) * Preferences.Get("ElectroTarif", 0.0);
                     electricity = result.ToString();
                     Preferences.Set("Electro", electricityDouble);
                     String ElectroStringTemplate = $"Электричество: {electricity} руб.";
-                    // await SendEmail(hotWaterStringTemplate);
+                    await SendEmail(ElectroStringTemplate);
                     await SendSms(ElectroStringTemplate, RegisterPage.person.phoneNumber);
                     //appendNewEvent(ElectroStringTemplate);
                 }
