@@ -24,26 +24,23 @@ namespace Tariff
             LabelName.Text = RegisterPage.person.name;
             LabelEmail.Text = RegisterPage.person.email;
             LabelPhoneNumber.Text = RegisterPage.person.phoneNumber;
-            HWTarif_.SelectedIndex = Preferences.Get("HW_picker", 0);
-            СWTarif_.SelectedIndex = Preferences.Get("CW_picker", 0);
-            GasTarif_.SelectedIndex = Preferences.Get("Gas_picker", 0);
-            ElectroTarif_.SelectedIndex = Preferences.Get("Electro_picker", 0);
             readHistory();
 
         }
 
         public void readHistory()
         {
-            double hotWaterLast = Preferences.Get("HW", 0.0);
-            double coldWaterLast = Preferences.Get("CW", 0.0);
-            double gasLast = Preferences.Get("GAS", 0.0);
-            double electricityLast = Preferences.Get("Electro", 0.0);
-            string Text = "По данным на " + DateTime.Today.ToString().Substring(0, 11) + " последние показания:";
-            appendDate(Text);
-            appendNewEvent($"Горячая вода: {hotWaterLast} куб. м.");
-            appendNewEvent($"Холодная вода: {coldWaterLast} куб. м.");
-            appendNewEvent($"Газ: {gasLast} куб. м.");
-            appendNewEvent($"Электричество: {electricityLast} Квт");
+            int hotWaterLast = Preferences.Get("HWLast", 0);
+            int coldWaterLast = Preferences.Get("CWLast", 0);
+            int gasLast = Preferences.Get("GasLast", 0);
+            int electricityLast = Preferences.Get("ElectricityLast", 0);
+            string currentData = "По данным на " + DateTime.Today.ToString().Substring(0, 11);
+
+            LastDateUpdateHistory.Text = currentData;
+            LabelHotWaterLast.Text = $"Горячая вода: {hotWaterLast}  куб. м";
+            LabelColdWaterLast.Text = $"Холодная вода: {coldWaterLast}  куб. м";
+            LabelGasLast.Text = $"Газ: {gasLast} куб. м";
+            LabelElectricityLast.Text = $"Электричество: {electricityLast} кВт";
         }
 
         public async Task SendEmail(String emailBody)
@@ -75,16 +72,12 @@ namespace Tariff
             }
         }
 
-        public async Task SendSms(string messageText, string recipient)
+        public async Task SendSms(string messageText)
         {
             try
             {
-                var message = new SmsMessage(messageText, new[] { recipient });
+                var message = new SmsMessage(messageText, new[] { RegisterPage.person.phoneNumber });
                 await Sms.ComposeAsync(message);
-            }
-            catch (FeatureNotSupportedException ex)
-            {
-                // Sms is not supported on this device.
             }
             catch (Exception ex)
             {
@@ -96,129 +89,45 @@ namespace Tariff
         {
             if (!RegisterPage.EmailValid(LabelEmail.Text))
             {
-                DisplayAlert("", "Введите валидный Email", "OK");
-            } else if (!RegisterPage.PhoneValid(LabelPhoneNumber.Text))
+                DisplayAlert("Ошибка", "Неверный email", "OK");
+            } 
+            else if (!RegisterPage.PhoneValid(LabelPhoneNumber.Text))
             {
-                DisplayAlert("", "Введите настоящий номер телефона", "OK");
-            } else if (!RegisterPage.NameValid(LabelName.Text))
+                DisplayAlert("Ошибка", "Неверный номер телефона", "OK");
+            } 
+            else if (!RegisterPage.NameValid(LabelName.Text))
             {
-                DisplayAlert("", "Длина логина должна быть больше 5 символов", "OK");
+                DisplayAlert("Ошибка", "Длина логина должна быть больше 5 символов", "OK");
             }
             else
             {
-                Preferences.Set("name", LabelName.Text);
-                Preferences.Set("email", LabelEmail.Text);
-                Preferences.Set("phoneNumber", LabelPhoneNumber.Text);
-
-                string hwZamena = HWTarif_.Items[HWTarif_.SelectedIndex].Substring(0, 5);
-                string cwZamena = СWTarif_.Items[СWTarif_.SelectedIndex].Substring(0, 5);
-                string gasZamena = GasTarif_.Items[GasTarif_.SelectedIndex].Substring(0, 7);
-                string electroZamena = ElectroTarif_.Items[ElectroTarif_.SelectedIndex].Substring(0, 4);
-
-
-                try
-                {
-                    Preferences.Set("HWTarif", double.Parse(hwZamena));
-                    Preferences.Set("CWTarif", double.Parse(cwZamena));
-                    Preferences.Set("GasTarif", double.Parse(gasZamena));
-                    Preferences.Set("ElectroTarif", double.Parse(electroZamena));
-                }
-                catch
-                {
-                    hwZamena = hwZamena.Replace('.', ',');
-                    cwZamena = cwZamena.Replace('.', ',');
-                    gasZamena = gasZamena.Replace('.', ',');
-                    electroZamena = electroZamena.Replace('.', ',');
-                    Preferences.Set("HWTarif", double.Parse(hwZamena));
-                    Preferences.Set("CWTarif", double.Parse(cwZamena));
-                    Preferences.Set("GasTarif", double.Parse(gasZamena));
-                    Preferences.Set("ElectroTarif", double.Parse(electroZamena));
-
-                }
-                Preferences.Set("HW_picker", HWTarif_.SelectedIndex);
-                Preferences.Set("CW_picker", СWTarif_.SelectedIndex);
-                Preferences.Set("Gas_picker", GasTarif_.SelectedIndex);
-                Preferences.Set("Electro_picker", ElectroTarif_.SelectedIndex);
+                RegisterPage.saveSettingsInFile();
                 DisplayAlert("", "Данные успешно изменены", "OK");
             }
-
-
-            
-        }
-
-
-        public void appendDate(String textBody)
-        {
-            Frame frame = new Frame
-            {
-                BackgroundColor = Color.Transparent,
-                CornerRadius = 20
-            };
-
-            StackLayout newEvent = new StackLayout
-            {
-                Children =
-                {
-                    new Label
-                    {
-                        Text = textBody,
-                        TextColor = Color.White,
-                        FontSize = 25,
-                    }
-                }
-            };
-
-            frame.Content = newEvent;
-            StackHistory.Children.Add(frame);
-        }
-
-
-        public void appendNewEvent(String textBody)
-        {
-            Frame frame = new Frame
-            {
-                BackgroundColor = Color.Black,
-                CornerRadius = 20
-            };
-
-            StackLayout newEvent = new StackLayout
-            {
-                Children =
-                {
-                    new Label
-                    {
-                        Text = textBody,
-                        TextColor = Color.White,
-                        FontSize = 20,
-                    }
-                }
-            };
-
-            frame.Content = newEvent;
-            StackHistory.Children.Add(frame);
         }
 
         private async void HotWaterClicked(object sender, EventArgs e)
         {
             String hotWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров", "Отправить", "Отмена");
-            double hotWaterDouble;
+            int hotWaterint;
             
-            if (Double.TryParse(hotWater, out hotWaterDouble))
+            if (int.TryParse(hotWater, out hotWaterint))
             {
-                double history = Preferences.Get("HW", 0.0);
-                if (hotWaterDouble > history)
+                int history = Preferences.Get("HWLast", 0);
+                if (hotWaterint > history)
                 {
-                    double result = (hotWaterDouble - history) * Preferences.Get("HWTarif", 0.0);
+                    int result = (hotWaterint - history) * RegisterPage.person.hotWater;
                     hotWater = result.ToString();
-                    Preferences.Set("HW", hotWaterDouble);
-                    String hotWaterStringTemplate = $"Горячая вода: {hotWater} руб.";
+                    Preferences.Set("HWLast", hotWaterint);
+                    String hotWaterStringTemplate = $"Горячая вода: {hotWaterint} куб. м";
+                    LabelHotWaterLast.Text = hotWaterStringTemplate;
+                    hotWaterStringTemplate += $"\nИтоговая сумма: {result} руб.";
                     await SendEmail(hotWaterStringTemplate);
-                    await SendSms(hotWaterStringTemplate, RegisterPage.person.phoneNumber);
-                    //appendNewEvent(hotWaterStringTemplate);
+                    await SendSms(hotWaterStringTemplate);
                 }
                 else
                 {
-                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                    await DisplayAlert("Ошибка", "Текущие показатели меньше предыдущих", "OK");
                 }
                 
             }
@@ -228,30 +137,31 @@ namespace Tariff
             }
             else
             {
-                await DisplayAlert("", "Показатели должны бить числами", "OK");
+                await DisplayAlert("Ошибка", "Неверно введены показатели", "OK");
             }
 
         }
         private async void ColdWaterClicked(object sender, EventArgs e)
         {
             String coldWater = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров", "Отправить", "Отмена");
-            double coldWaterDouble;
-            if (Double.TryParse(coldWater, out coldWaterDouble))
+            int coldWaterint;
+            if (int.TryParse(coldWater, out coldWaterint))
             {
-                double history = Preferences.Get("CW", 0.0);
-                if (coldWaterDouble > history)
+                int history = Preferences.Get("CWLast", 0);
+                if (coldWaterint > history)
                 {
-                    double result = (coldWaterDouble - history) * Preferences.Get("CWTarif", 0.0);
+                    int result = (coldWaterint - history) * RegisterPage.person.coldWater;
                     coldWater = result.ToString();
-                    Preferences.Set("CW", coldWaterDouble);
-                    String coldWaterStringTemplate = $"Холодная вода: {coldWater} руб.";
+                    Preferences.Set("CWLast", coldWaterint);
+                    String coldWaterStringTemplate = $"Холодная вода: {coldWaterint} куб. м";
+                    LabelColdWaterLast.Text = coldWaterStringTemplate;
+                    coldWaterStringTemplate += $"\nИтоговая сумма: {result} руб.";
                     await SendEmail(coldWaterStringTemplate);
-                    await SendSms(coldWaterStringTemplate, RegisterPage.person.phoneNumber);
-                    //appendNewEvent(coldWaterStringTemplate);
+                    await SendSms(coldWaterStringTemplate);
                 }
                 else
                 {
-                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                    await DisplayAlert("Ошибка", "Текущие показатели меньше предыдущих", "OK");
                 }
             }
             else if (coldWater == null)
@@ -260,30 +170,30 @@ namespace Tariff
             }
             else
             {
-                await DisplayAlert("", "Показатели должны бить числами", "OK");
+                await DisplayAlert("Ошибка", "Неверно введены показатели", "OK");
             }
         }
         private async void GasClicked(object sender, EventArgs e)
         {
             String gas = await DisplayPromptAsync("Введите показания счетчика", "Кубических метров", "Отправить", "Отмена");
-            double gasDouble;
-            if (Double.TryParse(gas, out gasDouble))
+            int gasint;
+            if (int.TryParse(gas, out gasint))
             {
-                double history = Preferences.Get("GAS", 0.0);
-                if (gasDouble > history)
+                int history = Preferences.Get("GasLast", 0);
+                if (gasint > history)
                 {
-                    double result = (gasDouble - history) * Preferences.Get("GasTarif", 0.0);
+                    int result = (gasint - history) * RegisterPage.person.gas;
                     gas = result.ToString();
-                    Preferences.Set("GAS", gasDouble);
-                    String GASStringTemplate = $"Газ: {gas} руб.";
-                    await SendEmail(GASStringTemplate);
-                    await SendSms(GASStringTemplate, RegisterPage.person.phoneNumber);
-                    //appendNewEvent(GASStringTemplate);
-
+                    Preferences.Set("GasLast", gasint);
+                    String GasStringTemplate = $"Газ: {gasint} куб. м";
+                    LabelGasLast.Text = GasStringTemplate;
+                    GasStringTemplate += $"\nИтоговая сумма: {result} руб.";
+                    await SendEmail(GasStringTemplate);
+                    await SendSms(GasStringTemplate);
                 }
                 else
                 {
-                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                    await DisplayAlert("Ошибка", "Текущие показатели меньше предыдущих", "OK");
                 }
 
             }
@@ -293,31 +203,32 @@ namespace Tariff
             }
             else
             {
-                await DisplayAlert("", "Показатели должны бить числами", "OK");
+                await DisplayAlert("Ошибка", "Неверно введены показатели", "OK");
             }
         }
         private async void ElectroClicked(object sender, EventArgs e)
         {
             String electricity = await DisplayPromptAsync("Введите показания счетчика", "кВт", "Отправить", "Отмена");
-            double electricityDouble;
+            int electricityint;
 
-            if (Double.TryParse(electricity, out electricityDouble))
+            if (int.TryParse(electricity, out electricityint))
             {
-                double history = Preferences.Get("Electro", 0.0);
+                int history = Preferences.Get("ElectricityLast", 0);
                 
-                if (electricityDouble > history)
+                if (electricityint > history)
                 {
-                    double result = (electricityDouble - history) * Preferences.Get("ElectroTarif", 0.0);
+                    int result = (electricityint - history) * RegisterPage.person.electricity;
                     electricity = result.ToString();
-                    Preferences.Set("Electro", electricityDouble);
-                    String ElectroStringTemplate = $"Электричество: {electricity} руб.";
-                    await SendEmail(ElectroStringTemplate);
-                    await SendSms(ElectroStringTemplate, RegisterPage.person.phoneNumber);
-                    //appendNewEvent(ElectroStringTemplate);
+                    Preferences.Set("ElectricityLast", result);
+                    String ElectoricityStringTemplate = $"Электричество: {electricityint} кВт";
+                    LabelElectricityLast.Text = ElectoricityStringTemplate;
+                    ElectoricityStringTemplate += $"\nИтоговая сумма: {result} руб.";
+                    await SendEmail(ElectoricityStringTemplate);
+                    await SendSms(ElectoricityStringTemplate);
                 }
                 else
                 {
-                    await DisplayAlert("", "Текущие показатели не могут быть меньше предыдущих", "OK");
+                    await DisplayAlert("Ошибка", "Текущие показатели меньше предыдущих", "OK");
                 }
             }
             else if (electricity == null)
@@ -326,8 +237,22 @@ namespace Tariff
             }
             else
             {
-                await DisplayAlert("", "Показатели должны бить числами", "OK");
+                await DisplayAlert("Ошибка", "Неверно введены показатели", "OK");
             }
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Preferences.Set("HWLast", 0);
+            Preferences.Set("CWLast", 0);
+            Preferences.Set("GasLast", 0);
+            Preferences.Set("ElectricityLast", 0);
+
+            LabelHotWaterLast.Text = $"Горячая вода: 0 куб. м.";
+            LabelColdWaterLast.Text = $"Холодная вода: 0 куб. м.";
+            LabelGasLast.Text = $"Газ: 0 куб. м";
+            LabelElectricityLast.Text = $"Электричество: 0 кВт";
+
         }
     }
 }

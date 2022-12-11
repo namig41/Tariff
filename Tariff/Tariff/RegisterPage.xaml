@@ -14,31 +14,31 @@
             <Picker x:Name="HWTarif_" SelectedIndexChanged="HWTarif" Title="Ваш тариф горячей воды" TitleColor="Gray" TextColor="White" FontSize ="20" >
 
                 <Picker.Items>
-                    <x:String>223.04 руб. за куб. м.</x:String>
-                    <x:String>198.13 руб. за куб. м.</x:String>
-                    <x:String>243.73 руб. за куб. м.</x:String>
+                    <x:String>223 руб. за куб. м.</x:String>
+                    <x:String>198 руб. за куб. м.</x:String>
+                    <x:String>243 руб. за куб. м.</x:String>
                 </Picker.Items>
             </Picker>
 
             <Picker x:Name="СWTarif_" SelectedIndexChanged="CWTarif" Title="Ваш тариф холодной воды" TitleColor="Gray" TextColor="White" FontSize ="20" >
                 <Picker.Items >
-                    <x:String>44.08 руб. за куб. м.</x:String>
-                    <x:String>42.97 руб. за куб. м.</x:String>
-                    <x:String>44.43 руб. за куб. м.</x:String>
+                    <x:String>44 руб. за куб. м.</x:String>
+                    <x:String>42 руб. за куб. м.</x:String>
+                    <x:String>44 руб. за куб. м.</x:String>
                 </Picker.Items>
             </Picker>
             <Picker x:Name="GasTarif_" SelectedIndexChanged="GasTarif" Title="Ваш тариф газа" TitleColor="Gray" TextColor="White" FontSize ="20">
                 <Picker.Items >
-                    <x:String>6374.96 руб. за 1000 куб. м.</x:String>
-                    <x:String>5875.08 руб. за 1000 куб. м.</x:String>
-                    <x:String>6764.60 руб. за 1000 куб. м.</x:String>
+                    <x:String>6375 руб. за 1000 куб. м.</x:String>
+                    <x:String>5875 руб. за 1000 куб. м.</x:String>
+                    <x:String>6765 руб. за 1000 куб. м.</x:String>
                 </Picker.Items>
             </Picker>
             <Picker x:Name="ElectroTarif_" SelectedIndexChanged="ElectroTarif" Title="Ваш тариф электричества" TitleColor="Gray" TextColor="White" FontSize ="20" >
                 <Picker.Items >
-                    <x:String>5.92 руб. за кВт</x:String>
-                    <x:String>6.17 руб. за кВт</x:String>
-                    <x:String>5.93 руб. за кВт</x:String>
+                    <x:String>6 руб. за кВт</x:String>
+                    <x:String>5 руб. за кВт</x:String>
+                    <x:String>4 руб. за кВт</x:String>
                 </Picker.Items>
             </Picker>
             <Button 

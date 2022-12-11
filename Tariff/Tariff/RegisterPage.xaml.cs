@@ -20,10 +20,10 @@ namespace Tariff
         public readonly static String defaultPassword = "1234";
         public readonly static String defaultEmail = "guseinovnamig41@gmail.com";
         public readonly static String defaultPhoneNumber = "+7 (985) 355-79-73";
-        public readonly static double defaultHotWTarif = 223.04;
-        public readonly static double defaultColdWTarif = 44.97;
-        public readonly static double defaultGasTarif = 6.37;
-        public readonly static double defaultElectricityTarif = 5.92;
+        public readonly static int defaultHotWTarif = 223;
+        public readonly static int defaultColdWTarif = 44;
+        public readonly static int defaultGasTarif = 6;
+        public readonly static int defaultElectricityTarif = 4;
 
         static RegisterPage()
         {
@@ -47,80 +47,48 @@ namespace Tariff
         
         public static bool NameValid(String name)
         {
-            if (name.Length > 5)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return name == null ? false : name.Length > 5;
         }
 
         private bool PasswordValid(String password)
         {
-            if (password.Length > 5)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return password == null ? false : password.Length > 5;
         }
-
 
         public static bool EmailValid(String email)
         {
-            if (email.Length > 5)
-            {
-                email.ToLower();
-                int a = email.IndexOf('@');
-                int b = email.IndexOf('.');
-                string good = "qwertyuiopasdfghjklzxcvbnm1234567890.@_-";
-                if (a == -1 ^ b == -1)
-                {
-                    return false;
-                }
-                if (b < a)
-                {
-                    return false;
-                }
-                foreach (char y in email)
-                {
-                    if (!good.Contains(y))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-
-            }
-            else
+            if (email == null || email.Length <= 5)
             {
                 return false;
             }
+            email.ToLower();
+            string good = "qwertyuiopasdfghjklzxcvbnm1234567890.@_-";
+            foreach (char y in email)
+            {
+                if (!good.Contains(y))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
 
         public static bool PhoneValid(String phone)
         {
-            string good = "0123456789";
-            if (phone.Length == 11)
-            {
-                foreach (char y in phone)
-                {
-                    if (!good.Contains(y))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            else
+            if (phone == null || phone.Length != 11)
             {
                 return false;
             }
+
+            foreach (char y in phone)
+            {
+                if (!Char.IsDigit(y))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
 
@@ -128,18 +96,19 @@ namespace Tariff
         {
             if (!NameValid(LabelUsername.Text))
             {
-                DisplayAlert("", "Длина логина должна быть больше 5 символов", "OK");
-            }else if (!PasswordValid(LabelPassword.Text))
-            {
-                DisplayAlert("", "Длина пароля должна быть больше 5 символов", "OK");
-            }
-            else if (!EmailValid(LabelEmail.Text))
-            {
-                DisplayAlert("", "Введите валидный Email", "OK");
+                DisplayAlert("Ошибка", "Длина логина должна быть больше 5 символов", "OK");
             }
             else if (!PhoneValid(LabelPhoneNumber.Text))
             {
-                DisplayAlert("", "Введите настоящий номер телефона", "OK");
+                DisplayAlert("Ошибка", "Неверный номер телефона", "OK");
+            }
+            else if (!EmailValid(LabelEmail.Text))
+            {
+                DisplayAlert("Ошибка", "Неверный email", "OK");
+            }
+            else if (!PasswordValid(LabelPassword.Text))
+            {
+                DisplayAlert("Ошибка", "Длина пароля должна быть больше 5 символов", "OK");
             }
             else
             {
@@ -152,78 +121,43 @@ namespace Tariff
             }            
         }
 
-        public void saveSettingsInFile()
+        static public void saveSettingsInFile()
         {
             Preferences.Set("name", person.name);
             Preferences.Set("password", person.password);
             Preferences.Set("email", person.email);
             Preferences.Set("phoneNumber", person.phoneNumber);
-            Preferences.Set("HW_picker", HWTarif_.SelectedIndex);
-            Preferences.Set("CW_picker", СWTarif_.SelectedIndex);
-            Preferences.Set("Gas_picker", GasTarif_.SelectedIndex);
-            Preferences.Set("Electro_picker", ElectroTarif_.SelectedIndex);
+            Preferences.Set("HWTarif", person.hotWater);
+            Preferences.Set("CWTarif", person.coldWater);
+            Preferences.Set("GasTarif", person.gas);
+            Preferences.Set("ElectricictyTarif", person.electricity);
 
         }
 
         void HWTarif(object sender, EventArgs e)
         {
             string tarifItem = HWTarif_.Items[HWTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, 5);
-            try
-            {
-                Preferences.Set("HWTarif", Double.Parse(tarifItem));
-            }
-            catch 
-            {
-                tarifItem = tarifItem.Replace('.', ',');
-                Preferences.Set("HWTarif", Double.Parse(tarifItem));
-            }
-           
-
+            tarifItem = tarifItem.Substring(0, 3);
+            person.coldWater = int.Parse(tarifItem);
         }
         void CWTarif(object sender, EventArgs e)
         {
             string tarifItem = СWTarif_.Items[СWTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, 5);
-            try
-            {
-                Preferences.Set("CWTarif", Double.Parse(tarifItem));
-            }
-            catch
-            {
-                tarifItem = tarifItem.Replace('.', ',');
-                Preferences.Set("CWTarif", Double.Parse(tarifItem));
-            }
+            tarifItem = tarifItem.Substring(0, 2);
+            person.coldWater = int.Parse(tarifItem);
         }
+
         void GasTarif(object sender, EventArgs e)
         {
             string tarifItem = GasTarif_.Items[GasTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, 7);
-            try
-            {
-                Preferences.Set("GasTarif", Double.Parse(tarifItem));
-            }
-            catch
-            {
-                tarifItem = tarifItem.Replace('.', ',');
-                Preferences.Set("GasTarif", Double.Parse(tarifItem));
-
-            }
-
+            tarifItem = tarifItem.Substring(0, 4);
+            person.gas = int.Parse(tarifItem);
         }
         void ElectroTarif(object sender, EventArgs e)
         {
             string tarifItem = ElectroTarif_.Items[ElectroTarif_.SelectedIndex];
-            tarifItem = tarifItem.Substring(0, 4);
-            try
-            {
-                Preferences.Set("ElectroTarif", Double.Parse(tarifItem));
-            }
-            catch
-            {
-                tarifItem = tarifItem.Replace('.', ',');
-                Preferences.Set("ElectroTarif", Double.Parse(tarifItem));
-            }
+            tarifItem = tarifItem.Substring(0, 1);
+            person.electricity = int.Parse(tarifItem);
         }
 
     }

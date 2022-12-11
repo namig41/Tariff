@@ -59,7 +59,7 @@
                         <ColumnDefinition Width ="*"/>
                         <ColumnDefinition Width ="80"/>
                     </Grid.ColumnDefinitions>
-                    <Label  Text="Газ" FontSize="37" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label Text="Газ" FontSize="37" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
                     <Image Grid.Column="1" Source="Gas.png"/>
                 </Grid>
             </Frame>
@@ -85,10 +85,77 @@
 
     
     <ContentPage Title="История" IconImageSource="History.png">
-        <ScrollView>
-            <StackLayout x:Name ="StackHistory" Padding="20" VerticalOptions="FillAndExpand">
-            </StackLayout>
-        </ScrollView>
+        <StackLayout Padding="15" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="История" FontSize="40" HorizontalOptions="Center" TextColor="White" Margin="1"/>
+            <Label x:Name="LastDateUpdateHistory" TextColor="Gray" FontSize="20" Padding="5" HorizontalOptions="Center"/>
+
+            <Frame BackgroundColor="#dcdcdc" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="60"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"  Source="HotWater.png"/>
+                    <Label Grid.Column="1" x:Name="LabelHotWaterLast" Text="Горячая вода" TextColor="Black" FontSize="25" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+            <Frame BackgroundColor="#778899" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="60"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="ColdWater.png"/>
+                    <Label Grid.Column="1" x:Name="LabelColdWaterLast" Text="Холодная вода" TextColor="Black" FontSize="25" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+            <Frame BackgroundColor="#b0c4de" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="60"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="Gas.png"/>
+                    <Label Grid.Column="1" x:Name="LabelGasLast" TextColor="Black" FontSize="25" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+            <Frame BackgroundColor="#48d1cc" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="60"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="electricity.png"/>
+                    <Label Grid.Column="1" x:Name="LabelElectricityLast" TextColor="Black" FontSize="25" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+            <Button Text="Очистить"
+                    BorderWidth="1.5"
+                    Margin="10"
+                    Padding="15"
+                    FontSize="20"
+                    CornerRadius="50"
+                    BackgroundColor="ForestGreen"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Clicked="Button_Clicked"/>
+        </StackLayout>
     </ContentPage>
 
 
@@ -101,12 +168,6 @@
                 <Grid Padding="20" RowSpacing="20">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -126,48 +187,19 @@
                     <Label Grid.Row="2" Text="Номер" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Entry Grid.Row="2" Grid.Column="1" x:Name="LabelPhoneNumber" TextColor="White" FontSize="20"/>
 
-                    <Label Grid.Row="3" Text="Тариф ГВ" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Picker Grid.Row="3" Grid.Column="1" x:Name="HWTarif_" Title="Ваш тариф горячей воды" TitleColor="Gray" TextColor="White" FontSize ="20" >
-
-                        <Picker.Items>
-                            <x:String>223.04 руб. за куб. м.</x:String>
-                            <x:String>198.13 руб. за куб. м.</x:String>
-                            <x:String>243.73 руб. за куб. м.</x:String>
-                        </Picker.Items>
-                    </Picker>
-
-                    <Label Grid.Row="4" Text="Тариф ХВ" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Picker Grid.Row="4" Grid.Column="1" x:Name="СWTarif_" Title="Ваш тариф холодной воды" TitleColor="Gray" TextColor="White" FontSize ="20" >
-                        <Picker.Items >
-                            <x:String>44.08 руб. за куб. м.</x:String>
-                            <x:String>42.97 руб. за куб. м.</x:String>
-                            <x:String>44.43 руб. за куб. м.</x:String>
-                        </Picker.Items>
-                    </Picker>
-
-                    <Label Grid.Row="5" Text="Тариф Газа" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Picker Grid.Row="5" Grid.Column="1" x:Name="GasTarif_" Title="Ваш тариф газа" TitleColor="Gray" TextColor="White" FontSize ="20">
-                        <Picker.Items >
-                            <x:String>6374.96 руб. за 1000 куб. м.</x:String>
-                            <x:String>5875.08 руб. за 1000 куб. м.</x:String>
-                            <x:String>6764.60 руб. за 1000 куб. м.</x:String>
-                        </Picker.Items>
-                    </Picker>
-
-                    <Label Grid.Row="6" Text="Тариф Электро" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Picker Grid.Row="6" Grid.Column="1" x:Name="ElectroTarif_" Title="Ваш тариф электричества" TitleColor="Gray" TextColor="White" FontSize ="20" >
-                        <Picker.Items >
-                            <x:String>5.92 руб. за кВт</x:String>
-                            <x:String>6.17 руб. за кВт</x:String>
-                            <x:String>5.93 руб. за кВт</x:String>
-                        </Picker.Items>
-                    </Picker>
-
-                    <Button Grid.Row="7" Grid.ColumnSpan="2" Text="Изменить данные" BorderWidth="1.5"  Padding="15" FontSize="15" CornerRadius="50" 
-                        BackgroundColor="ForestGreen" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked_1"/>
-
-                </Grid>
-
+                        <Button Grid.Row="3" 
+                            Grid.ColumnSpan="2" 
+                            Text="Изменить данные" 
+                            BorderWidth="1.5"
+                            Padding="15"
+                            FontSize="15"
+                            CornerRadius="50" 
+                            BackgroundColor="ForestGreen"
+                            TextColor="White"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Clicked="Button_Clicked_1"/>
+                    </Grid>
             </Frame>
         </StackLayout>
         </ScrollView>
