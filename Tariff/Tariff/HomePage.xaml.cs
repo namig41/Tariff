@@ -101,6 +101,9 @@ namespace Tariff
             }
             else
             {
+                RegisterPage.person.name = LabelName.Text;
+                RegisterPage.person.email = LabelEmail.Text;
+                RegisterPage.person.phoneNumber = LabelPhoneNumber.Text;
                 RegisterPage.saveSettingsInFile();
                 DisplayAlert("", "Данные успешно изменены", "OK");
             }
