@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
             <Label Text="Регистрация" FontSize="25" HorizontalOptions="Center" TextColor="White"/>
-            <Entry x:Name="LabelUsername" Placeholder="Логин" TextColor="White" FontSize ="20" PlaceholderColor="Gray"/>
+            <Entry x:Name="LabelUsername" Placeholder="Имя" TextColor="White" FontSize ="20" PlaceholderColor="Gray"/>
             <Entry x:Name="LabelPhoneNumber" Placeholder="Номер телефона"  TextColor="White" FontSize ="20" PlaceholderColor="Gray"/>
             <Entry x:Name="LabelEmail" Placeholder="Почта" TextColor="White" PlaceholderColor="Gray"/>
             <Entry x:Name="LabelPassword" Placeholder="Пароль" IsPassword ="True" TextColor="White" FontSize ="20" PlaceholderColor="Gray"/>
@@ -23,8 +23,8 @@
             <Picker x:Name="СWTarif_" SelectedIndexChanged="CWTarif" Title="Ваш тариф холодной воды" TitleColor="Gray" TextColor="White" FontSize ="20" >
                 <Picker.Items >
                     <x:String>44 руб. за куб. м.</x:String>
+                    <x:String>43 руб. за куб. м.</x:String>
                     <x:String>42 руб. за куб. м.</x:String>
-                    <x:String>44 руб. за куб. м.</x:String>
                 </Picker.Items>
             </Picker>
             <Picker x:Name="GasTarif_" SelectedIndexChanged="GasTarif" Title="Ваш тариф газа" TitleColor="Gray" TextColor="White" FontSize ="20">

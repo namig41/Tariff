@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
             <Label Text="Добро пожаловать" FontSize="25" HorizontalOptions="Center" TextColor="White"/>
-            <Entry x:Name="LabelUsername" Placeholder="Логин" TextColor="White" PlaceholderColor="Gray"/>
+            <Entry x:Name="LabelUsername" Placeholder="Имя" TextColor="White" PlaceholderColor="Gray"/>
             <Entry x:Name="LabelPassword" Placeholder="Пароль" IsPassword ="True" TextColor="White" PlaceholderColor="Gray"/>
             <Button 
                 VerticalOptions="Center"
