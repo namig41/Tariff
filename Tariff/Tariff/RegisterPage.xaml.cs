@@ -18,8 +18,8 @@ namespace Tariff
 
         public readonly static String defaultName = "admin";
         public readonly static String defaultPassword = "1234";
-        public readonly static String defaultEmail = "guseinovnamig41@gmail.com";
-        public readonly static String defaultPhoneNumber = "+7 (985) 355-79-73";
+        public readonly static String defaultEmail = "*********";
+        public readonly static String defaultPhoneNumber = "*******";
         public readonly static int defaultHotWTarif = 223;
         public readonly static int defaultColdWTarif = 44;
         public readonly static int defaultGasTarif = 6;

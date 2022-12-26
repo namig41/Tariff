@@ -59,7 +59,7 @@ namespace Tariff
                 SmtpServer.Host = "smtp.gmail.com";
                 SmtpServer.EnableSsl = true;
                 SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("guseinovnamig41@gmail.com", "carqhtndzfopylto");
+                SmtpServer.Credentials = new System.Net.NetworkCredential("guseinovnamig41@gmail.com", "******");
 
                 SmtpServer.Send(mail);
 
